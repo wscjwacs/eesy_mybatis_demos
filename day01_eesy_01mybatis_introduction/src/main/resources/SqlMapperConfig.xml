@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+    <!-- 加载类路径下的属性文件 -->
+    <properties resource="db.properties"/>
+
+    <!--使用typeAliases配置别名，它只能配置domain中类的别名 -->
+    <typeAliases>
+        <!--typeAlias用于配置别名。type属性指定的是实体类全限定类名。alias属性指定别名，当指定了别名就再区分大小写
+        <typeAlias type="User" alias="user"></typeAlias>-->
+
+        <!-- 用于指定要配置别名的包，当指定之后，该包下的实体类都会注册别名，并且类名就是别名，不再区分大小写-->
+        <package name="com.flyz.domain"></package>
+    </typeAliases>
+
+    <!--配置环境-->
+    <environments default="mysql">
+        <!--配置mysql环境-->
+        <environment id="mysql">
+            <!--配置事物类型-->
+            <transactionManager type="JDBC"/>
+            <!--配置数据源-->
+            <dataSource type="POOLED">
+                <!--配置连接数据库的4个基本信息-->
+                <!--<property name="driver" value="com.mysql.jdbc.Driver"/>-->
+                <!--<property name="url" value="jdbc:mysql://localhost:3306/mybatis?characterEncoding=utf8"/>-->
+                <!--<property name="username" value="root"/>-->
+                <!--<property name="password" value="wscjwacs"/>-->
+
+                <!-- 配置与数据库交互的4个必要属性 -->
+                <property name="driver" value="${mysql.driver}"/>
+                <property name="url" value="${mysql.url}"/>
+                <property name="username" value="${mysql.username}"/>
+                <property name="password" value="${mysql.password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <!--制定映射配置文件的位置,映射配置文件指的是每个dao独立的配置文件-->
+    <mappers>
+        <mapper resource="com/flyz/dao/IUserDao.xml"/>
+
+    </mappers>
+
+
+
+</configuration>
